@@ -25,7 +25,6 @@ namespace TaxManager.Tests
         public void TestInsertMunicipalityTax()
         {
             var service = new TaxManagerService();
-            //var result = service.InsertMunicipalityTax("testingmunicipality", (int)TaxType.Daily, (decimal)0.08, DateTime.Today, DateTime.Today);
 
             var result = service.InsertMunicipalityTax(new MunicipalityTaxDTO
             {

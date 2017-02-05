@@ -10,4 +10,6 @@ Note: while doing the task I have came to some strange permission issues accessi
 3) Build the project <br/>
 4) Open command prompt in path TaxManager\TaxManager\bin\Debug <br/>
 5) Run Command InstallUtil TaxManager.exe <br/>
-Note: once again, to avoid permission issues, set up windows service to run on your personal Windows account.
+Note: once again, to avoid permission issues, set up windows service to run on your personal Windows account. <br/><br/>
+
+After installing the Windows service, TaxManager web service will be accessible on http://localhost:8000/TaxManager/service

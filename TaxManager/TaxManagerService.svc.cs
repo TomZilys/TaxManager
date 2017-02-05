@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TaxManager.Models;
 using TaxManager.Models.Enums;
 
@@ -17,7 +20,7 @@ namespace TaxManager
     public class TaxManagerService : ITaxManagerService
     {
         /// <summary>
-        /// Inserts municipality tax into database
+        /// Inserts municipality tax
         /// </summary>
         /// <param name="municipalityName"></param>
         /// <param name="taxType"></param>
@@ -29,19 +32,36 @@ namespace TaxManager
         {
             try
             {
+                var endTimeSpan = new TimeSpan(23, 59, 59);
                 var municipalityTax = new MunicipalityTax
                 {
                     MunicipalityId = GetMunicipalityId(municipalityName),
                     TaxTypeId = (int)taxType,
                     TaxValue = taxValue,
                     PeriodStartDate = startDate,
-                    PeriodEndDate = endDate
+                    PeriodEndDate = endDate + endTimeSpan
                 };
 
-                using (var taxDbContext = new TaxManagerDBEntities())
+                InsertMunicipalityTaxToDb(municipalityTax);
+            }
+            catch (Exception e)
+            {
+                // TODO: log the exception
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool InsertMunicipalityTaxesFromFile(string filePath)
+        {
+            try
+            {
+                var taxList = new List<MunicipalityTaxDTO>();
+                using (StreamReader file = File.OpenText(filePath))
                 {
-                    taxDbContext.MunicipalityTax.Add(municipalityTax);
-                    taxDbContext.SaveChanges();
+                    JsonSerializer serializer = new JsonSerializer();
+                    taxList = (List<MunicipalityTaxDTO>)serializer.Deserialize(file, typeof(List<MunicipalityTaxDTO>));
                 }
             }
             catch (Exception e)
@@ -72,6 +92,19 @@ namespace TaxManager
             }
 
             return municipalityId;
+        }
+
+        /// <summary>
+        /// Inserts Tax to DB
+        /// </summary>
+        /// <param name="municipalityTax"></param>
+        private void InsertMunicipalityTaxToDb(MunicipalityTax municipalityTax)
+        {
+            using (var taxDbContext = new TaxManagerDBEntities())
+            {
+                taxDbContext.MunicipalityTax.Add(municipalityTax);
+                taxDbContext.SaveChanges();
+            }
         }
     }
 }

@@ -21,11 +21,18 @@ namespace TaxManager.Tests
         }
 
         [TestMethod]
-        public void TestGetMunicipalityId()
+        public void TestInsertMunicipalityTax()
         {
             var service = new TaxManagerService();
             var result = service.InsertMunicipalityTax("testingmunicipality", (int)TaxType.Daily, (decimal)0.08, DateTime.Today, DateTime.Today);
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestInsertMunicipalityTaxesFromFile()
+        {
+            var service = new TaxManagerService();
+            service.InsertMunicipalityTaxesFromFile("");
         }
     }
 }

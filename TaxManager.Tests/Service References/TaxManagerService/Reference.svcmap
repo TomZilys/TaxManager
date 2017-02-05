@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b594b753-ffdc-4e6d-8f88-4ad775a900d2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8000/TaxManager/service" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.disco" MetadataType="Disco" ID="3fd66538-799b-4ed4-99a2-4986ab6c83a2" SourceId="1" SourceUrl="http://localhost:8000/TaxManager/service?disco" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="2cea00b6-f598-4165-b9a0-c6142decabe8" SourceId="1" SourceUrl="http://localhost:8000/TaxManager/service?xsd=xsd1" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="6d3552df-c73c-4857-8cd0-a5a58b81472e" SourceId="1" SourceUrl="http://localhost:8000/TaxManager/service?xsd=xsd2" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="64c87873-c337-4bbf-a003-fdc57bfd605f" SourceId="1" SourceUrl="http://localhost:8000/TaxManager/service?xsd=xsd0" />
+    <MetadataFile FileName="TaxManagerService.wsdl" MetadataType="Wsdl" ID="9bcbd1a7-24b0-4d95-bbb1-3e9dcea3972f" SourceId="1" SourceUrl="http://localhost:8000/TaxManager/service?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

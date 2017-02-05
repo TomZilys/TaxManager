@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.ServiceProcess;
 using System.Configuration;
 using System.Configuration.Install;
+using log4net;
 using Newtonsoft.Json;
 using TaxManager.Models;
 
@@ -17,6 +18,16 @@ namespace TaxManager
     /// </summary>
     public class TaxManagerService : ITaxManagerService
     {
+        private ILog logger;
+        public TaxManagerService()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            this.logger = LogManager.GetLogger(typeof(TaxManagerService));
+            logger.Info("service started");
+            var dataPath = ConfigurationManager.AppSettings["DataDirectory"];
+            AppDomain.CurrentDomain.SetData("DataDirectory", dataPath);
+        }
+
         /// <summary>
         /// Inserts municipality tax
         /// </summary>
@@ -28,6 +39,7 @@ namespace TaxManager
         /// <returns></returns>
         public bool InsertMunicipalityTax(MunicipalityTaxDTO municipalityTaxDto)
         {
+            logger.Info("performing inserrt");
             try
             {
                 var municipalityTax = municipalityTaxDto.ToEntity();
@@ -35,7 +47,7 @@ namespace TaxManager
             }
             catch (Exception e)
             {
-                // TODO: log the exception
+                logger.Error("Error has occurred in InsertMunicipalityTax", e);
                 return false;
             }
 
@@ -64,7 +76,7 @@ namespace TaxManager
             }
             catch (Exception e)
             {
-                // TODO: log the exception
+                logger.Error("Error has occurred in InsertMunicipalityTaxesFromFile", e);
                 return false;
             }
 

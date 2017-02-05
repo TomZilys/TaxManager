@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TaxManager.Models;
 using TaxManager.Models.Enums;
+using TaxManager.Tests.TaxManagerService;
 
 namespace TaxManager.Tests
 {
@@ -24,13 +25,13 @@ namespace TaxManager.Tests
         [TestMethod]
         public void TestInsertMunicipalityTax()
         {
-            var service = new TaxManagerService();
+            var service = new TaxManager.TaxManagerService();
 
             var result = service.InsertMunicipalityTax(new MunicipalityTaxDTO
             {
                 MunicipalityName = "testingmunicipality",
                 TaxType = (int)TaxType.Daily,
-                TaxValue = (decimal)0.08,
+                TaxValue = 0.08m,
                 StartDate = DateTime.Today,
                 EndDate = DateTime.Today
             });
@@ -40,8 +41,24 @@ namespace TaxManager.Tests
         [TestMethod]
         public void TestInsertMunicipalityTaxesFromFile()
         {
-            var service = new TaxManagerService();
+            var service = new TaxManager.TaxManagerService();
             var result = service.InsertMunicipalityTaxesFromFile(@"c:\import.json");
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestHostedService()
+        {
+            var client = new TaxManagerServiceClient();
+            var result = client.InsertMunicipalityTax(new MunicipalityTaxDTO
+            {
+                MunicipalityName = "testingmunicipality",
+                TaxType = (int)TaxType.Daily,
+                TaxValue = 0.07m,
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Today
+            });
+
             Assert.IsTrue(result);
         }
     }

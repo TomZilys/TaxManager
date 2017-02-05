@@ -14,5 +14,8 @@ namespace TaxManager
     {
         [OperationContract]
         bool InsertMunicipalityTax(MunicipalityTaxDTO municipalityTaxDto);
+
+        [OperationContract]
+        bool InsertMunicipalityTaxesFromFile(string filePath);
     }
 }

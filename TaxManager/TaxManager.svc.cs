@@ -16,15 +16,22 @@ namespace TaxManager
     /// </summary>
     public class TaxManagerService : ITaxManagerService
     {
-        
-
+        /// <summary>
+        /// Inserts municipality tax into database
+        /// </summary>
+        /// <param name="municipalityName"></param>
+        /// <param name="taxType"></param>
+        /// <param name="taxValue"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
         public bool InsertMunicipalityTax(string municipalityName, TaxType taxType, decimal taxValue, DateTime startDate, DateTime endDate)
         {
             try
             {
                 var municipalityTax = new MunicipalityTax
                 {
-                    MunicipalityId = 1,
+                    MunicipalityId = GetMunicipalityId(municipalityName),
                     TaxTypeId = (int)taxType,
                     TaxValue = taxValue,
                     PeriodStartDate = startDate,
@@ -34,6 +41,7 @@ namespace TaxManager
                 using (var taxDbContext = new TaxManagerDBEntities())
                 {
                     taxDbContext.MunicipalityTax.Add(municipalityTax);
+                    taxDbContext.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -58,7 +66,7 @@ namespace TaxManager
             {
                 var municipality =
                     taxDbContext.Municipality.FirstOrDefault(
-                        x => string.Equals(x.MunicipalityName, municipalityName, StringComparison.CurrentCultureIgnoreCase));
+                        x => string.Equals(x.MunicipalityName, municipalityName));
 
                 //if (municipality != null)
                 //{

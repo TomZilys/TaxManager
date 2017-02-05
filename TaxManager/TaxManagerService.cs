@@ -38,7 +38,6 @@ namespace TaxManager
             try
             {
                 var municipalityId = GetMunicipalityId(municipalityName);
-
                 using (var taxDbContext = new TaxManagerDBEntities())
                 {
                     var tax = taxDbContext.MunicipalityTax
@@ -74,7 +73,6 @@ namespace TaxManager
         /// <returns></returns>
         public bool InsertMunicipalityTax(MunicipalityTaxDTO municipalityTaxDto)
         {
-            logger.Info("performing inserrt");
             try
             {
                 var municipalityTax = municipalityTaxDto.ToEntity();

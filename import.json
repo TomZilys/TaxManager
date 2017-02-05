@@ -1,0 +1,4 @@
+[
+	{municipalityName: "Kaunas", taxType: 1, taxValue: 0.5, startDate: "2017-02-16", endDate: "2017-02-16"},
+	{municipalityName: "Kaunas", taxType: 4, taxValue: 0.2, startDate: "2017-01-01", endDate: "2017-12-31"}
+]

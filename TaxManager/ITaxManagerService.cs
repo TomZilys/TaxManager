@@ -13,6 +13,6 @@ namespace TaxManager
     public interface ITaxManagerService
     {
         [OperationContract]
-        bool InsertMunicipalityTax(string municipalityName, TaxType taxType, decimal taxValue, DateTime startDate, DateTime endDate);
+        bool InsertMunicipalityTax(string municipalityName, int taxType, decimal taxValue, DateTime startDate, DateTime endDate);
     }
 }

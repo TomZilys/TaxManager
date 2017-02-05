@@ -83,7 +83,7 @@
       <DependentUpon>TaxManager.edmx</DependentUpon>
       <LastGenOutput>TaxManager.cs</LastGenOutput>
     </Content>
-    <Content Include="TaxManager.svc" />
+    <Content Include="TaxManagerService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -109,10 +109,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TaxManager.edmx</DependentUpon>
     </Compile>
-    <Compile Include="TaxManager.svc.cs">
-      <DependentUpon>TaxManager.svc</DependentUpon>
+    <Compile Include="TaxManagerService.svc.cs">
+      <DependentUpon>TaxManagerService.svc</DependentUpon>
     </Compile>
-    <Compile Include="ITaxManager.cs" />
+    <Compile Include="ITaxManagerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,7 @@ namespace TaxManager
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public bool InsertMunicipalityTax(string municipalityName, TaxType taxType, decimal taxValue, DateTime startDate, DateTime endDate)
+        public bool InsertMunicipalityTax(string municipalityName, int taxType, decimal taxValue, DateTime startDate, DateTime endDate)
         {
             try
             {
@@ -67,11 +67,6 @@ namespace TaxManager
                 var municipality =
                     taxDbContext.Municipality.FirstOrDefault(
                         x => string.Equals(x.MunicipalityName, municipalityName));
-
-                //if (municipality != null)
-                //{
-                //    municipalityId = municipality.Id;
-                //}
 
                 municipalityId = municipality?.Id ?? -1;
             }

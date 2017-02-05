@@ -24,7 +24,7 @@ namespace TaxManager.Tests
         public void TestGetMunicipalityId()
         {
             var service = new TaxManagerService();
-            var result = service.InsertMunicipalityTax("testingmunicipality", TaxType.Daily, (decimal)0.08, DateTime.Today, DateTime.Today);
+            var result = service.InsertMunicipalityTax("testingmunicipality", (int)TaxType.Daily, (decimal)0.08, DateTime.Today, DateTime.Today);
             Assert.IsTrue(result);
         }
     }

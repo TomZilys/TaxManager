@@ -8,6 +8,7 @@ namespace TaxManager.Models
     public class MunicipalityTaxDTO
     {
         public string MunicipalityName { get; set; }
+        public int? MunicipalityId { get; set; }
         public int TaxType { get; set; }
         public decimal TaxValue { get; set; } 
         public DateTime StartDate { get; set; } 

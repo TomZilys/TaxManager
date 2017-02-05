@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using TaxManager.Models;
 using TaxManager.Models.Enums;
 
 namespace TaxManager
@@ -13,6 +14,6 @@ namespace TaxManager
     public interface ITaxManagerService
     {
         [OperationContract]
-        bool InsertMunicipalityTax(string municipalityName, int taxType, decimal taxValue, DateTime startDate, DateTime endDate);
+        bool InsertMunicipalityTax(MunicipalityTaxDTO municipalityTaxDto);
     }
 }

@@ -28,20 +28,11 @@ namespace TaxManager
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public bool InsertMunicipalityTax(string municipalityName, int taxType, decimal taxValue, DateTime startDate, DateTime endDate)
+        public bool InsertMunicipalityTax(MunicipalityTaxDTO municipalityTaxDto)
         {
             try
             {
-                var endTimeSpan = new TimeSpan(23, 59, 59);
-                var municipalityTax = new MunicipalityTax
-                {
-                    MunicipalityId = GetMunicipalityId(municipalityName),
-                    TaxTypeId = (int)taxType,
-                    TaxValue = taxValue,
-                    PeriodStartDate = startDate,
-                    PeriodEndDate = endDate + endTimeSpan
-                };
-
+                var municipalityTax = municipalityTaxDto.ToEntity();
                 InsertMunicipalityTaxToDb(municipalityTax);
             }
             catch (Exception e)
@@ -53,15 +44,24 @@ namespace TaxManager
             return true;
         }
 
+        /// <summary>
+        /// Imports taxes from a JSON file
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public bool InsertMunicipalityTaxesFromFile(string filePath)
         {
             try
             {
-                var taxList = new List<MunicipalityTaxDTO>();
                 using (StreamReader file = File.OpenText(filePath))
                 {
-                    JsonSerializer serializer = new JsonSerializer();
-                    taxList = (List<MunicipalityTaxDTO>)serializer.Deserialize(file, typeof(List<MunicipalityTaxDTO>));
+                    var serializer = new JsonSerializer();
+                    var taxList = (List<MunicipalityTaxDTO>)serializer.Deserialize(file, typeof(List<MunicipalityTaxDTO>));
+
+                    foreach (var taxDto in taxList)
+                    {
+                        InsertMunicipalityTax(taxDto);
+                    }
                 }
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace TaxManager
         /// </summary>
         /// <param name="municipalityName"></param>
         /// <returns></returns>
-        private int GetMunicipalityId(string municipalityName)
+        internal int GetMunicipalityId(string municipalityName)
         {
             var municipalityId = -1;
 

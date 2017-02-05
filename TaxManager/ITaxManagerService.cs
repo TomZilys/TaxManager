@@ -17,5 +17,8 @@ namespace TaxManager
 
         [OperationContract]
         bool InsertMunicipalityTaxesFromFile(string filePath);
+
+        [OperationContract]
+        decimal GetMunicipalityTax(string municipalityName, DateTime dateTime);
     }
 }

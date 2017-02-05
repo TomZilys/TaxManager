@@ -29,6 +29,41 @@ namespace TaxManager
         }
 
         /// <summary>
+        /// Return specific municipality tax by municipality name and date
+        /// </summary>
+        /// <param name="municipalityName"></param>
+        /// <param name="dateTime"></param>
+        public decimal GetMunicipalityTax(string municipalityName, DateTime dateTime)
+        {
+            try
+            {
+                var municipalityId = GetMunicipalityId(municipalityName);
+
+                using (var taxDbContext = new TaxManagerDBEntities())
+                {
+                    var tax = taxDbContext.MunicipalityTax
+                        .Where(x => x.MunicipalityId == municipalityId &&
+                                    x.PeriodStartDate <= dateTime &&
+                                    x.PeriodEndDate > dateTime)
+                        .OrderBy(y => y.TaxTypeId).FirstOrDefault();
+
+
+                    if (tax != null)
+                    {
+                        return tax.TaxValue;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error has occurred in GetMunicipalityTax", e);
+                return -1;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
         /// Inserts municipality tax
         /// </summary>
         /// <param name="municipalityName"></param>

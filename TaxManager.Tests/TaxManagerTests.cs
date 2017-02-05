@@ -61,5 +61,22 @@ namespace TaxManager.Tests
 
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void TestGetMunicipalityTax()
+        {
+            var service = new TaxManager.TaxManagerService();
+            var result = service.GetMunicipalityTax("Vilnius", DateTime.Parse("2016-01-01"));
+            Assert.IsTrue(result == 0.1m);
+
+            result = service.GetMunicipalityTax("Vilnius", DateTime.Parse("2016-05-02"));
+            Assert.IsTrue(result == 0.4m);
+
+            result = service.GetMunicipalityTax("Vilnius", DateTime.Parse("2016-07-10"));
+            Assert.IsTrue(result == 0.2m);
+
+            result = service.GetMunicipalityTax("Vilnius", DateTime.Parse("2016-03-16"));
+            Assert.IsTrue(result == 0.2m);
+        }
     }
 }

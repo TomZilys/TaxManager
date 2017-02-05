@@ -41,7 +41,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -63,20 +73,60 @@
     <Content Include="App_Data\TaxManagerDB_log.ldf">
       <DependentUpon>TaxManagerDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Models\TaxManager.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TaxManager.edmx</DependentUpon>
+      <LastGenOutput>TaxManager.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\TaxManager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TaxManager.edmx</DependentUpon>
+      <LastGenOutput>TaxManager.cs</LastGenOutput>
+    </Content>
     <Content Include="TaxManager.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Enums\TaxType.cs" />
+    <Compile Include="Models\Municipality.cs">
+      <DependentUpon>TaxManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MunicipalityTax.cs">
+      <DependentUpon>TaxManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaxManager.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaxManager.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaxManager.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaxManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaxManager.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaxManager.edmx</DependentUpon>
+    </Compile>
     <Compile Include="TaxManager.svc.cs">
       <DependentUpon>TaxManager.svc</DependentUpon>
     </Compile>
     <Compile Include="ITaxManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <EntityDeploy Include="Models\TaxManager.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TaxManager.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TaxManager.edmx.diagram">
+      <DependentUpon>TaxManager.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

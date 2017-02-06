@@ -75,6 +75,7 @@ namespace TaxManager
         {
             try
             {
+                // TODO: Handle situations when tax already exists for given period of time
                 var municipalityTax = municipalityTaxDto.ToEntity();
                 InsertMunicipalityTaxToDb(municipalityTax);
             }
